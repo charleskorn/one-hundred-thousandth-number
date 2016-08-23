@@ -79,6 +79,6 @@ Let's say we're working out what the 100,000th number is.
 The first digit is 3, because n is between 2×8! + 1 (= 80641) and 3×8! (= 120960).
 
 The second digit is 5, because n % 8! (19360) is between 3×7! + 1 (= 15121) and 4×7! (= 20160),
-which means we pick the fourth remaining digit (1,2,4,5,6,7,8,9).
+which means we pick the fourth remaining digit from 1,2,4,5,6,7,8,9.
 
 ...and so on, until we get the answer of 358926471.
