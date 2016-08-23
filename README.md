@@ -45,7 +45,9 @@ We can take advantage of this to go from a sequence index (n) to the number in t
 (For example, for n = 1, the number is 123456789, and for n = 2, the number is 123456798.)
 
 * Any number with n between 1 and 8! will start with a 1
+
 * Any number with n between 8! + 1 and 2×8! will start with a 2
+
 * Any number with n between 2×8! + 1 and 3×8! will start with a 3
 
   ...and so on
@@ -58,8 +60,10 @@ possibilities left to choose from) in a similar way to the first digit.
 * Any number with n % 8! between 1 and 7! will have a second digit equal to the first remaining
   digit (eg. if the first digit was 1, then this would be 2, since the remaining digits are
   2,3,4,5,6,7,8,9)
+
 * Any number with n % 8! between 7! + 1 and 2×7! will have a second digit equal to the second
   remaining digit (eg. if the first digit was 1, then this would be 3)
+
 * Any number with n % 8! between 2×7! + 1 and 3×7! will have a second digit equal to the third
   remaining digit (eg. if the first digit was 1, then this would be 4)
 
