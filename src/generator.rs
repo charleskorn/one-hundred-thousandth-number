@@ -1,6 +1,14 @@
 const DIGITS: u32 = 9;
 
-pub fn generate_nth_number(n: u32) -> u32 {
+pub fn generate_nth_number(n: u32) -> Result<u32, String> {
+    let max_n = factorial(DIGITS as usize);
+
+    if n == 0 {
+        return Err("sequence item number must be greater than zero".to_string());
+    } else if n > max_n {
+        return Err(format!("sequence item number must be less than or equal to {}", max_n).to_string());
+    }
+
     let mut available_digits = (1..DIGITS+1).collect::<Vec<_>>();
     let mut digits_selected: Vec<u32> = Vec::new();
 
@@ -10,7 +18,7 @@ pub fn generate_nth_number(n: u32) -> u32 {
         digits_selected.push(available_digits.remove(selected_index))
     }
 
-    from_digits(digits_selected)
+    Ok(from_digits(digits_selected))
 }
 
 fn select_digit_index(n: u32, number_of_available_digits: usize) -> usize {
@@ -39,31 +47,41 @@ mod test {
 
     #[test]
     fn generates_first_number() {
-        assert_eq!(generate_nth_number(1), 123456789)
+        assert_eq!(generate_nth_number(1), Ok(123456789))
     }
 
     #[test]
     fn generates_second_number() {
-        assert_eq!(generate_nth_number(2), 123456798)
+        assert_eq!(generate_nth_number(2), Ok(123456798))
     }
 
     #[test]
     fn generates_third_number() {
-        assert_eq!(generate_nth_number(3), 123456879)
+        assert_eq!(generate_nth_number(3), Ok(123456879))
     }
 
     #[test]
     fn generates_boundary_number() {
-        assert_eq!(generate_nth_number(factorial(8) + 1), 213456789)
+        assert_eq!(generate_nth_number(factorial(8) + 1), Ok(213456789))
     }
 
     #[test]
     fn generates_boundary_number_plus_one() {
-        assert_eq!(generate_nth_number(factorial(8) + 2), 213456798)
+        assert_eq!(generate_nth_number(factorial(8) + 2), Ok(213456798))
     }
 
     #[test]
     fn generates_last_number() {
-        assert_eq!(generate_nth_number(factorial(9)), 987654321)
+        assert_eq!(generate_nth_number(factorial(9)), Ok(987654321))
+    }
+
+    #[test]
+    fn returns_error_for_zero() {
+        assert_eq!(generate_nth_number(0), Err("sequence item number must be greater than zero".to_string()))
+    }
+
+    #[test]
+    fn returns_error_for_greater_than_last_item_in_sequence() {
+        assert_eq!(generate_nth_number(factorial(9) + 1), Err("sequence item number must be less than or equal to 362880".to_string()))
     }
 }

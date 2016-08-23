@@ -44,7 +44,7 @@ function test {
 }
 
 function run {
-  runInDockerContainer cargo run --quiet "$@"
+  runInDockerContainer cargo run --quiet -- "$@"
 }
 
 function runInDockerContainer {
